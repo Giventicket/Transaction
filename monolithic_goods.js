@@ -74,7 +74,7 @@ function unregister(method, pathname, params, cb) {
 		errorcode: 0,
 		errormessage: 'success'
 	};
-	
+	console.log("params.id : ", params.id);
 	if(params.id === null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
