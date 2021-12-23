@@ -19,4 +19,6 @@
 
 ## 아키텍쳐
   <p align="center"><img src="https://user-images.githubusercontent.com/39179946/147266469-52831767-2b26-4ed6-ba52-f304d3820204.png"><p/>
-
+  sudo docker build . -t transaction
+  <br/>
+  docker run -p 8080:8080 -d transaction
