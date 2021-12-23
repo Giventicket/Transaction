@@ -1,0 +1,22 @@
+{
+  "name": "transaction",
+  "version": "1.0.0",
+  "description": "practice transaction service",
+  "main": "monolithic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Giventicket/Transaction.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Giventicket/Transaction/issues"
+  },
+  "homepage": "https://github.com/Giventicket/Transaction#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
