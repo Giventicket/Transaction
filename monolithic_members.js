@@ -57,27 +57,6 @@ function inquiry(method, pathname, params, cb) {
 		errormessage: 'success'
 	};
 	
-	let connection = mysql.createConnection(conn);
-	connection.connect();
-	connection.query("SELECT * FROM goods;", (error, results, fields) => {
-		if(error || results.length === 0) {
-			response.errorcode = 1;
-			response.errormessage = error ? error : "no data";
-		} else {
-			response.results = results;
-		}
-		cb(response);
-	});
-	connection.end();
-}
-
-function inquiry(method, pathname, params, cb) {
-	let response = {
-		key: params.key,
-		errorcode: 0,
-		errormessage: 'success'
-	};
-	
 	if(params.username === null || params.password === null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
