@@ -14,5 +14,9 @@
 ## 파일 구성
   <p align="center"><img src="https://user-images.githubusercontent.com/39179946/147264946-bcb2bf62-048f-4657-ba4d-106c12ec079c.png"><p/>
   
+##  비지니스 로직 호출과정(예시)
+  <p align="center"><img src="https://user-images.githubusercontent.com/39179946/147267289-4a4acc92-76bd-449f-87ec-44418f6d6666.png"><p/>
+
 ## 아키텍쳐
-  
+  <p align="center"><img src="https://user-images.githubusercontent.com/39179946/147266469-52831767-2b26-4ed6-ba52-f304d3820204.png"><p/>
+
