@@ -64,7 +64,7 @@ function inquiry(method, pathname, params, cb) {
 	} else {
 		let connection = mysql.createConnection(conn);
 		connection.connect();
-		connection.query("SELECT id FROM members WHERE username = ? and password = password(?)", [params.username, params.password], (error, results, fields) => {
+		connection.query("SELECT id FROM members WHERE username = ? and password = ?", [params.username, params.password], (error, results, fields) => {
 			if (error || results.length === 0) {
 				response.errorcode = 1;
 				response.errormessage = error ? error : "invalid password";
