@@ -41,6 +41,7 @@ function onRequest(res, method, pathname, params){
 			purchases.onRequest(res, method, pathname, params, response);
 		default:
 			res.writeHead(404);
+			console.log("holy shit happened");
 			return res.end();
 	}
 }
