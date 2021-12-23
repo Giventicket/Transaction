@@ -1,3 +1,11 @@
+const mysql = require('mysql');
+const conn = {
+	host: "34.64.132.47",
+	user: 'root',
+	password: '',
+	database: 'monolithic'
+};
+
 exports.onRequest = function (res, method, pathname, params, cb) {
 	switch (method) {
 		case "POST":
@@ -14,5 +22,79 @@ exports.onRequest = function (res, method, pathname, params, cb) {
 			});
 		default:
 			return process.nextTick(cb, res, null);
+	}
+}
+
+function register(method, pathname, params, cb) {
+	let response = {
+		errorcode: 0,
+		errormessage: 'success'
+	};
+	
+	if(params.username === null || params.password === null) {
+		response.errorcode = 1;
+		response.errormessage = "Invalid Parameters";
+		cb(response);
+	} else {
+		let connection = mysql.createConnection(conn);
+		connection.connect();
+		connection.query("INSERT INTO members(username, password) values(?, ?)", [params.username, params.password], (error, results, fields) => {
+			if (error) {
+				response.errorcode = 1;
+				response.errormessage = error;
+			}
+			cb(response);
+		})
+		connection.end();
+	}
+}
+
+function inquiry(method, pathname, params, cb) {
+	let response = {
+		errorcode: 0,
+		errormessage: 'success'
+	};
+	if(params.username === null || params.password === null) {
+		response.errorcode = 1;
+		response.errormessage = "Invalid Parameters";
+		cb(response);
+	} else {
+		let connection = mysql.createConnection(conn);
+		connection.connect();
+		connection.query("SELECT id FROM members where username = ? and password = password(?)", [params.username, params.password], (error, results, fields) => {
+			if(error || results.length === 0) {
+				response.errorcode = 1;
+				response.errormessage = error ? error : "invalid password";
+			} else {
+				response.userid = results[0].id;
+			}
+			cb(response);
+		});
+		connection.end();
+	}
+	
+}
+
+function unregister(method, pathname, params, cb) {
+	let response = {
+		errorcode: 0,
+		errormessage: 'success'
+	};
+	
+	if(params.id === null) {
+		response.errorcode = 1;
+		response.errormessage = "Invalid Parameters";
+		cb(response);
+	} else {
+		let connection = mysql.createConnection(conn);
+		connection.connect();
+		connection.query("DELETE FROM goods WHERE id = ?", [params.id], (error, results, fields) => {
+			if (error) {
+				response.errorcode = 1;
+				response.errormessage = error;
+			}
+			cb(response);
+		})
+		connection.end();
 	}
 }
