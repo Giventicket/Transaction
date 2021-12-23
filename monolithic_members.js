@@ -26,10 +26,8 @@ exports.onRequest = function (res, method, pathname, params, cb) {
 	}
 }
 
-
 function register(method, pathname, params, cb) {
 	let response = {
-		key: params.key,
 		errorcode: 0,
 		errormessage: 'success'
 	};
@@ -41,8 +39,7 @@ function register(method, pathname, params, cb) {
 	} else {
 		let connection = mysql.createConnection(conn);
 		connection.connect();
-		console.log(connection);
-		connection.query("INSERT INTO goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.catagory, params.price, params.description], (error, results, fields) => {
+		connection.query("INSERT INTO members(username, password) values(?, ?)", [params.username, params.password], (error, results, fields) => {
 			if (error) {
 				response.errorcode = 1;
 				response.errormessage = error;
