@@ -82,7 +82,7 @@ function unregister(method, pathname, params, cb) {
 	} else {
 		let connection = mysql.createConnection(conn);
 		connection.connect();
-		connection.query("DELETE INTO goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.catagory, params.price, params.description], (error, results, fields) => {
+		connection.query("DELETE INTO goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.category, params.price, params.description], (error, results, fields) => {
 			if (error) {
 				response.errorcode = 1;
 				response.errormessage = error;
