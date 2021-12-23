@@ -85,7 +85,7 @@ function unregister(method, pathname, params, cb) {
 		errormessage: 'success'
 	};
 	
-	if(params.id == null) {
+	if(params.username == null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);
