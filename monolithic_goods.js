@@ -3,8 +3,7 @@ const conn = {
 	host: "34.64.132.47",
 	user: 'root',
 	password: '',
-	database: 'monolithic',
-	port:'3306'
+	database: 'monolithic'
 };
 
 exports.onRequest = function (res, method, pathname, params, cb) {
@@ -28,20 +27,18 @@ exports.onRequest = function (res, method, pathname, params, cb) {
 
 function register(method, pathname, params, cb) {
 	let response = {
-		key: params.key,
 		errorcode: 0,
 		errormessage: 'success'
 	};
 	
-	if(params.username === null || params.password === null) {
+	if(params.name === null || params.category === null || params.price ===null || params.description === null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);
 	} else {
 		let connection = mysql.createConnection(conn);
 		connection.connect();
-		console.log(connection);
-		connection.query("INSERT INTO goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.catagory, params.price, params.description], (error, results, fields) => {
+		connection.query("INSERT into goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.catagory, params.price, params.description], (error, results, fields) => {
 			if (error) {
 				response.errorcode = 1;
 				response.errormessage = error;
@@ -57,25 +54,19 @@ function inquiry(method, pathname, params, cb) {
 		errorcode: 0,
 		errormessage: 'success'
 	};
-	if(params.username === null || params.password === null) {
-		response.errorcode = 1;
-		response.errormessage = "Invalid Parameters";
-		cb(response);
-	} else {
-		let connection = mysql.createConnection(conn);
-		connection.connect();
-		connection.query("SELECT id FROM members where username = ? and password = password(?)", [params.username, params.password], (error, results, fields) => {
-			if(error || results.length === 0) {
-				response.errorcode = 1;
-				response.errormessage = error ? error : "invalid password";
-			} else {
-				response.userid = results[0].id;
-			}
-			cb(response);
-		});
-		connection.end();
-	}
 	
+	let connection = mysql.createConnection(conn);
+	connection.connect();
+	connection.query("SELECT * FROM goods", (error, results, fields) => {
+		if(error || results.length === 0) {
+			response.errorcode = 1;
+			response.errormessage = error ? error : "no data";
+		} else {
+			response.results = results;
+		}
+		cb(response);
+	});
+	connection.end();
 }
 
 function unregister(method, pathname, params, cb) {
@@ -91,7 +82,7 @@ function unregister(method, pathname, params, cb) {
 	} else {
 		let connection = mysql.createConnection(conn);
 		connection.connect();
-		connection.query("DELETE FROM goods WHERE id = ?", [params.id], (error, results, fields) => {
+		connection.query("DELETE INTO goods(name, category, price, description) values(?, ?, ?, ?)", [params.name, params.catagory, params.price, params.description], (error, results, fields) => {
 			if (error) {
 				response.errorcode = 1;
 				response.errormessage = error;
