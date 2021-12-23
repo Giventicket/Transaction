@@ -34,11 +34,11 @@ let server = http.createServer((req, res,) => {
 function onRequest(res, method, pathname, params){
 	switch(pathname){
 		case "/members": 
-			members.onRequest(res, method, pathname, params, response);
+			return members.onRequest(res, method, pathname, params, response);
 		case "/goods": 
-			goods.onRequest(res, method, pathname, params, response);
+			return goods.onRequest(res, method, pathname, params, response);
 		case "/purchases": 
-			purchases.onRequest(res, method, pathname, params, response);
+			return purchases.onRequest(res, method, pathname, params, response);
 		default:
 			res.writeHead(404);
 			console.log("holy shit happened");
