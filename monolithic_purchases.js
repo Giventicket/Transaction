@@ -29,7 +29,7 @@ function register(method, pathname, params, cb) {
 		errormessage: 'success'
 	};
 	
-	if(params.userid === null || params.goodsid === null) {
+	if(params.userid == null || params.goodsid == null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);
@@ -56,7 +56,7 @@ function inquiry(method, pathname, params, cb) {
 		errormessage: 'success'
 	};
 	
-	if(params.userid === null) {
+	if(params.userid == null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);

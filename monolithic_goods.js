@@ -31,7 +31,7 @@ function register(method, pathname, params, cb) {
 		errormessage: 'success'
 	};
 	
-	if(params.name === null || params.category === null || params.price ===null || params.description === null) {
+	if(params.name == null || params.category == null || params.price == null || params.description == null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);
@@ -74,8 +74,7 @@ function unregister(method, pathname, params, cb) {
 		errorcode: 0,
 		errormessage: 'success'
 	};
-	console.log("params.id : ", params.id);
-	if(params.id === null) {
+	if(params.id == null) {
 		response.errorcode = 1;
 		response.errormessage = "Invalid Parameters";
 		cb(response);
